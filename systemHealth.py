@@ -11,30 +11,46 @@ def get_uptime():
     return uptime_formatted
  
 def getCPUusage():
-    CPUpercent = psutil.cpu_percent(interval=5)
-    CPUpercent = str(CPUpercent)
+    array = []
+    for i in range(120):
+        array.append(psutil.cpu_percent())
+        time.sleep(.5)
+    CPUpercent = sum(array) / len(array)
+
     return CPUpercent
 
 def getMemory():
     memory = (psutil.virtual_memory().available * 100) / (psutil.virtual_memory().total)
-    memory = str(memory)
     return memory
 
 def getDiskSpace():
     total, used, free = shutil.disk_usage("/")
-    freeDisk = str((free/total)*100)
+    freeDisk = (free/total)*100
     return freeDisk
 
 def main():
-    uptime = get_uptime()
-    CPU = getCPUusage()
-    memory = getMemory()
-    freeDisk = getDiskSpace()
+    
+    while True:
+        uptime = get_uptime()
+        CPU = getCPUusage()
+        memory = getMemory()
+        freeDisk = getDiskSpace()
+        CPUHealth = True
+        memoryHealth = True
+        diskHealth = True
+        if CPU > 50:
+            print("\a[WARNING] sustained higher CPU usage\nCPU has averaged " + str(CPU) + "% for 5 minutes")
+            CPUHealth = False
+        if memory < 10:
+            print("\a[WARNING] RAM usage is at " + str(100-memory) + "%")
+            memoryHealth = False
+        if freeDisk < 10:
+            print("\a[WARNING] Disk almost full, only " + str(freeDisk) + "% remaning")
+            diskHealth = False
+        if CPUHealth and memoryHealth and diskHealth:
+            print("system is healthy")
+        time.sleep(5)
 
-    print("current uptime: "+uptime)
-    print(CPU + "% CPU usage")
-    print(memory + "% memory available")
-    print(freeDisk + "% free disk Space")
 
 
 if __name__ == "__main__":
