@@ -13,7 +13,7 @@ def get_uptime():
 def main():
     uptime = get_uptime()
     print("current uptime: "+uptime)
-    print(psutil.cpu_percent(), "% CPU usage")
+    print(psutil.cpu_percent(interval=5), "% CPU usage")
     print(psutil.virtual_memory().available * 100 / psutil.virtual_memory().total, "% memory available")
     total, used, free = shutil.disk_usage("/")
     print((free / total) * 100, "% free disk Space")
