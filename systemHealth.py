@@ -20,7 +20,10 @@ def get_uptime():
     uptime_seconds = int(now - boot_time)
     uptime_formatted = str(datetime.timedelta(seconds=uptime_seconds))
     return uptime_formatted
- 
+
+def getQuickCPUusage():
+    return psutil.cpu_percent()
+
 def getCPUusage():
     array = []
     for i in range(120):
@@ -56,18 +59,38 @@ def check():
         print("\a[WARNING] Disk almost full, only " + str(freeDisk) + "% remaning")
         diskHealth = False
     if CPUHealth and memoryHealth and diskHealth:
-        print("system is healthy")
+        print("\nsystem is healthy", end='\r')
+
+def Snapshot():
+    CPU = getQuickCPUusage()
+    memory = getMemory()
+    freeDisk = getDiskSpace()
+    print("Current CPU usage " + str(CPU) + "%")
+    print("Current RAM usage " + str(100-memory) + "%")
+    print("Current free Disk " + str(freeDisk) + "%")
 
 def main():
     print("Welcome!")
     while True:
-        print("System Health Check, please select option below")
+        print("\n\nSystem Health Check, please select option below")
         print("1. continuous monitoring")
         print("2. quick monitor (takes 1 min)")
         print("3. snapshot (view resources at this exact moment)")
         print("0. exit")
         choice = inputInt("option: ")
-        print(choice)
+        
+        if choice == 1:
+            while True:
+                check()
+                time.sleep(5)
+        elif choice == 2:
+            check()
+        elif choice == 3:
+            Snapshot()
+        elif choice == 0:
+            exit()
+        else:
+            print("[ERROR] Invalid option selected, please choose option from provided menu")
 
 
 
