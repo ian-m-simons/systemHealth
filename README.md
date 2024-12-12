@@ -4,7 +4,7 @@ Purpose:
 
 How to use:
 	
-	> Meant to be run in a terminal then minimized, it will give an audible alert if something is unhealthy
-
+	> run in terminal
+	> will be given the option to run continuously, run system check once, or take a snap shot of current resource usage
+	> if run continuously it will provide audible alert if resources are overused
 TODO:
-	> consider adding a menu
