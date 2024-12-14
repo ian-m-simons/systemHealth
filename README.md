@@ -8,3 +8,5 @@ How to use:
 	> will be given the option to run continuously, run system check once, or take a snap shot of current resource usage
 	> if run continuously it will provide audible alert if resources are overused
 TODO:
+
+    >format percentages to 2 decimal places
