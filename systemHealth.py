@@ -49,6 +49,7 @@ def check():
     CPUHealth = True
     memoryHealth = True
     diskHealth = True
+
     if CPU > 50:
         print("\a[WARNING] sustained higher CPU usage\nCPU has averaged " + str(CPU) + "% for 5 minutes")
         CPUHealth = False
@@ -59,7 +60,10 @@ def check():
         print("\a[WARNING] Disk almost full, only " + str(freeDisk) + "% remaning")
         diskHealth = False
     if CPUHealth and memoryHealth and diskHealth:
-        print("\nsystem is healthy", end='\r')
+        print("\nsystem is healthy")
+        print("CPU 5 min avg " + str(CPU) + "%")
+        print("RAM usage " + str(100-memory) + "%")
+        print("Disk usage " + str(100-freeDisk) + "%")
 
 def Snapshot():
     CPU = getQuickCPUusage()
