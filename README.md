@@ -9,3 +9,4 @@ How to use:
 	> if run continuously it will provide audible alert if resources are overused
 TODO:
 
+	> allow user to change time period to check CPU usage
