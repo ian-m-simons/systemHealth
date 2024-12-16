@@ -9,4 +9,3 @@ How to use:
 	> if run continuously it will provide audible alert if resources are overused
 TODO:
 
-    >format percentages to 2 decimal places
