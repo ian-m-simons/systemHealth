@@ -91,7 +91,7 @@ def main():
     while True:
         print("\n\nSystem Health Check, please select option below")
         print("1. continuous monitoring")
-        print("2. quick monitor (single monitor cyclet)")
+        print("2. quick monitor (single monitor cycle)")
         print("3. snapshot (view resources at this exact moment)")
         print("4. change how long to monitor CPU (default 60 seconds)")
         print("0. exit")
