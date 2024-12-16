@@ -72,8 +72,11 @@ def Snapshot():
     CPU = getQuickCPUusage()
     memory = getMemory()
     freeDisk = getDiskSpace()
+    CPU = float("{:.2f}".format(CPU))
+    memory = float("{:.2f}".format(100-memory))
+    freeDisk = float("{:.2f}".format(freeDisk))
     print("Current CPU usage " + str(CPU) + "%")
-    print("Current RAM usage " + str(100-memory) + "%")
+    print("Current RAM usage " + str(memory) + "%")
     print("Current free Disk " + str(freeDisk) + "%")
 
 def main():
