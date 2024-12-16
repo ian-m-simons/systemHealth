@@ -27,7 +27,7 @@ def getQuickCPUusage():
 def getCPUusage(cpuTime):
     array = []
 
-    for i in range(cpuTime):
+    for i in range(cpuTime*2):
         array.append(psutil.cpu_percent())
         time.sleep(.5)
     CPUpercent = sum(array) / len(array)
@@ -87,13 +87,13 @@ def Snapshot():
 
 def main():
     print("Welcome!")
-    cpuTime = 120
+    cpuTime = 60
     while True:
         print("\n\nSystem Health Check, please select option below")
         print("1. continuous monitoring")
-        print("2. quick monitor (takes 1 min)")
+        print("2. quick monitor (single monitor cyclet)")
         print("3. snapshot (view resources at this exact moment)")
-        print("4. change how long to monitor CPU")
+        print("4. change how long to monitor CPU (default 60 seconds)")
         print("0. exit")
         choice = inputInt("option: ")
         
