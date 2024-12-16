@@ -93,7 +93,7 @@ def main():
         print("1. continuous monitoring")
         print("2. quick monitor (single monitor cycle)")
         print("3. snapshot (view resources at this exact moment)")
-        print("4. change how long to monitor CPU (default 60 seconds)")
+        print("4. change how long to monitor length of monitor cycle (default 60 seconds)")
         print("0. exit")
         choice = inputInt("option: ")
         
@@ -106,10 +106,10 @@ def main():
         elif choice == 3:
             Snapshot()
         elif choice == 4:
-            cpuTime = inputInt("please enter the number of seconds to use for CPU check ")
+            cpuTime = inputInt("please enter the number of seconds to use for monitor cycle ")
             while cpuTime < 1:
                 print("[ERROR] time must be a positive number")
-                cpuTime = inputInt("please enter the number of seconds to use for CPU check ")
+                cpuTime = inputInt("please enter the number of seconds to use for monitor cycle ")
 
         elif choice == 0:
             exit()
