@@ -24,9 +24,10 @@ def get_uptime():
 def getQuickCPUusage():
     return psutil.cpu_percent()
 
-def getCPUusage():
+def getCPUusage(cpuTime):
     array = []
-    for i in range(120):
+
+    for i in range(cpuTime):
         array.append(psutil.cpu_percent())
         time.sleep(.5)
     CPUpercent = sum(array) / len(array)
@@ -42,8 +43,13 @@ def getDiskSpace():
     freeDisk = (free/total)*100
     return freeDisk
 
-def check():
-    CPU = getCPUusage()
+def check(cpuTime):
+    CPU = getCPUusage(cpuTime)
+    measumentePeriod = ""
+    if cpuTime >= 60:
+        measurementPeriod = str(cpuTime/60) + " min "
+    else:
+        measurementPeriod = str(cpuTime) + " sec "
     memory = getMemory()
     freeDisk = getDiskSpace()
     CPUHealth = True
@@ -52,7 +58,7 @@ def check():
     CPU = float("{:.2f}".format(CPU))
     memory = float("{:.2f}".format(100-memory))
     freeDisk = float("{:.2f}".format(100-freeDisk))
-
+    
     if CPU > 50:
         print("\a[WARNING] sustained higher CPU usage\nCPU has averaged " + str(CPU) + "% for 5 minutes")
         CPUHealth = False
@@ -64,7 +70,7 @@ def check():
         diskHealth = False
     if CPUHealth and memoryHealth and diskHealth:
         print("\nsystem is healthy")
-        print("CPU 5 min avg " + str(CPU) + "%")
+        print("CPU "+ measurementPeriod + "avg " + str(CPU) + "%")
         print("RAM usage " + str(memory) + "%")
         print("Disk usage " + str(freeDisk) + "%")
 
@@ -81,22 +87,30 @@ def Snapshot():
 
 def main():
     print("Welcome!")
+    cpuTime = 120
     while True:
         print("\n\nSystem Health Check, please select option below")
         print("1. continuous monitoring")
         print("2. quick monitor (takes 1 min)")
         print("3. snapshot (view resources at this exact moment)")
+        print("4. change how long to monitor CPU")
         print("0. exit")
         choice = inputInt("option: ")
         
         if choice == 1:
             while True:
-                check()
+                check(cpuTime)
                 time.sleep(5)
         elif choice == 2:
             check()
         elif choice == 3:
             Snapshot()
+        elif choice == 4:
+            cpuTime = inputInt("please enter the number of seconds to use for CPU check ")
+            while cpuTime < 1:
+                print("[ERROR] time must be a positive number")
+                cpuTime = inputInt("please enter the number of seconds to use for CPU check ")
+
         elif choice == 0:
             exit()
         else:
