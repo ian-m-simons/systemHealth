@@ -27,7 +27,7 @@ def getQuickCPUusage():
 
 def getCPUusage(cpuTime):
     array = []
-
+    #check CPU usage every half second for given time check
     for i in range(cpuTime*2):
         array.append(psutil.cpu_percent())
         time.sleep(.5)
@@ -52,6 +52,7 @@ def getDiskSpace():
     return freeDisk
 
 def check(cpuTime):
+    #get necessary info
     CPU = getCPUusage(cpuTime)
     measumentePeriod = ""
     if cpuTime >= 60:
@@ -59,14 +60,17 @@ def check(cpuTime):
     else:
         measurementPeriod = str(cpuTime) + " sec "
     memory = getMemory()
-    freeDisk = getDiskSpace()
+    freeDisk = getDiskSpace(
+
     CPUHealth = True
     memoryHealth = True
     diskHealth = True
+    #format data
     CPU = float("{:.2f}".format(CPU))
     memory = float("{:.2f}".format(100-memory))
     freeDisk = float("{:.2f}".format(100-freeDisk))
     
+    #check health and print status
     if CPU > 50:
         print("\a[WARNING] sustained higher CPU usage\nCPU has averaged " + str(CPU) + "% for 5 minutes")
         CPUHealth = False
@@ -83,12 +87,17 @@ def check(cpuTime):
         print("Disk usage " + str(freeDisk) + "%")
 
 def Snapshot():
+    #get necessary info
     CPU = getQuickCPUusage()
     memory = getMemory()
     freeDisk = getDiskSpace()
+
+    #format data
     CPU = float("{:.2f}".format(CPU))
     memory = float("{:.2f}".format(100-memory))
     freeDisk = float("{:.2f}".format(freeDisk))
+    
+    #print data
     print("Current CPU usage " + str(CPU) + "%")
     print("Current RAM usage " + str(memory) + "%")
     print("Current free Disk " + str(freeDisk) + "%")
