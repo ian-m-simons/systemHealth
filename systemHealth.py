@@ -52,7 +52,7 @@ def getDiskSpace():
     return freeDisk
 
 def check(cpuTime):
-    #get necessary info
+    #get necessary data
     CPU = getCPUusage(cpuTime)
     measumentePeriod = ""
     if cpuTime >= 60:
@@ -87,7 +87,7 @@ def check(cpuTime):
         print("Disk usage " + str(freeDisk) + "%")
 
 def Snapshot():
-    #get necessary info
+    #get necessary data
     CPU = getQuickCPUusage()
     memory = getMemory()
     freeDisk = getDiskSpace()
@@ -106,6 +106,7 @@ def main():
     print("Welcome!")
     cpuTime = 60
     while True:
+        #main menu
         print("\n\nSystem Health Check, please select option below")
         print("1. continuous monitoring")
         print("2. quick monitor (single monitor cycle)")
