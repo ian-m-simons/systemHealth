@@ -60,7 +60,7 @@ def check(cpuTime):
     else:
         measurementPeriod = str(cpuTime) + " sec "
     memory = getMemory()
-    freeDisk = getDiskSpace(
+    freeDisk = getDiskSpace()
 
     CPUHealth = True
     memoryHealth = True
@@ -111,7 +111,7 @@ def main():
         print("1. continuous monitoring")
         print("2. quick monitor (single monitor cycle)")
         print("3. snapshot (view resources at this exact moment)")
-        print("4. change how long to monitor length of monitor cycle (default 60 seconds)")
+        print("4. change length of monitor cycle (default 60 seconds)")
         print("0. exit")
         choice = inputInt("option: ")
         
